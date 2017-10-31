@@ -1,0 +1,61 @@
+{
+    "lite-proxyserver": {
+        "mock": {
+            "enabled": true,
+            "file": "./mock/rest-services.js"
+        },
+        "proxy": {
+            "enabled": true,
+            "targetHosts": {
+                "FACHTEST": { "host": "msas6174i.msg.de", "port": 12020 },
+                "NIGHTLY":  { "host": "msas6174i.msg.de", "port": 11020 },
+                "LOCAL":    { "host": "localhost", "port": 9080 },
+                "DRAGAN":  { "host": "MSGN01381.int.root.msg.ag", "port": 9080 },
+                "CSILLA":  { "host": "MSGN02493.int.root.msg.ag", "port": 9080 },
+                "ANDREIT": { "host": "MSGN02599.int.root.msg.ag", "port": 9080 },
+                "GALINA":  { "host": "MSGN02273.int.root.msg.ag", "port": 9080 },
+                "GUENTER": { "host": "MSGN01771.int.root.msg.ag", "port": 9080 },
+                "ROBERT":  { "host": "MSGN02496.int.root.msg.ag", "port": 9080 },
+                "MAREK":   { "host": "MSGN02642.int.root.msg.ag", "port": 9080 },
+                "DAN":     { "host": "MSGN02482.int.root.msg.ag", "port": 9080 }
+            },
+            "target": "NIGHTLY",
+            "port": 2345,
+            "host": "foo",
+            "https": true,
+            "base": "www",
+            "redirectRootToApp": "/rejectsAndComplaint/defectNotice/",
+            "proxyPassReverse": true,
+            "proxies": [
+                { "context": "/common/resources",                                        "hostRewrite": true },
+                { "context": "/rejectsAndComplaint/defectNotice/login",                  "hostRewrite": true },
+                { "context": "/rejectsAndComplaint/adminSupplier/login",                 "hostRewrite": true },
+                { "context": "/rejectsAndComplaint/adminSubscription/login",             "hostRewrite": true },
+                { "context": "/rejectsAndComplaint/resources",                           "hostRewrite": true },
+                { "context": "/rejectsAndComplaint/j_security_check",                    "hostRewrite": true },
+                {
+                    "context": "/rejectsAndComplaint/ibm_security_logout",
+                    "hostRewrite": false,
+                    "headers": {
+                        "accept-encoding": ""
+                    }
+                },
+                {
+                    "context": "/weblogin",
+                    "hostRewrite": true,
+                    "headers": {
+                        "accept-encoding": ""
+                    }
+                },
+                {
+                    "context": "/SQMS",
+                    "hostRewrite": true,
+                    "headers": {
+                        "accept-encoding": ""
+                    }
+                }
+            ]
+        }
+    }
+
+}
